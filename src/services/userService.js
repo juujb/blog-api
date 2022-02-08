@@ -5,11 +5,15 @@ const { User } = require('../models');
 
 const secret = process.env.JWT_SECRET;
 
+const findByEmail = async (email) => {
+  const user = await User.findOne({ where: { email } });
+  return user;
+};
+
 const create = async (body) => {
   const { email } = body;
-  const userExist = await User.findOne({ where: { email } });
   
-  if (userExist) {
+  if (await findByEmail(email)) {
     return { code: 409, message: 'User already registered' };
   }
   
