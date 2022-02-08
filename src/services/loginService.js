@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { findByEmail } = require('./userService');
 
@@ -10,18 +11,18 @@ const login = async (body) => {
 
   if (!user) {
     return { code: 400, message: 'Invalid fields' };
-  } 
+  }
 
   const { id } = user;
 
-  const token = jwt.sign({ 
-    id,
-  },
-  secret, 
-  {
-    algorithm: 'HS256',
-    expiresIn: '7d',
-  });
+  const token = jwt.sign(
+    { data: id },
+    secret, 
+    {
+      algorithm: 'HS256',
+      expiresIn: '7d',
+    },
+  );
 
   return { code: 200, token };
 };
