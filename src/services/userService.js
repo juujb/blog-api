@@ -31,4 +31,4 @@ const create = async (body) => {
   return { code: 201, token };
 };
 
-module.exports = { create };
+module.exports = { create, findByEmail };
