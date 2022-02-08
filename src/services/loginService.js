@@ -24,7 +24,6 @@ const login = async (body) => {
   });
 
   return { code: 200, token };
-
 };
 
 module.exports = { login };
