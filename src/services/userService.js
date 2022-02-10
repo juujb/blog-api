@@ -6,7 +6,6 @@ const { User } = require('../models');
 const secret = process.env.JWT_SECRET;
 
 const findByEmail = async (email) => {
-  console.log(email);
   const user = await User.findOne({ where: { email } });
   return user;
 };
@@ -38,4 +37,14 @@ const getAll = async () => {
   return { code: 200, users };
 };
 
-module.exports = { create, findByEmail, getAll };
+const getById = async (id) => {
+  const user = await User.findOne({ where: { id } });
+
+  if (!user) {
+    return { code: 404, message: 'User does not exist' };
+  }
+
+  return { code: 200, user };
+};
+
+module.exports = { create, findByEmail, getAll, getById };
