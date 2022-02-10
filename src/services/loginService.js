@@ -13,10 +13,8 @@ const login = async (body) => {
     return { code: 400, message: 'Invalid fields' };
   }
 
-  const { id } = user;
-
   const token = jwt.sign(
-    { data: id },
+    { data: { email } },
     secret, 
     {
       algorithm: 'HS256',

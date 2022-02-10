@@ -6,6 +6,7 @@ const { User } = require('../models');
 const secret = process.env.JWT_SECRET;
 
 const findByEmail = async (email) => {
+  console.log(email);
   const user = await User.findOne({ where: { email } });
   return user;
 };
@@ -17,10 +18,10 @@ const create = async (body) => {
     return { code: 409, message: 'User already registered' };
   }
   
-  const newUser = await User.create(body);
+  await User.create(body);
 
   const token = jwt.sign(
-    { id: newUser.id }, 
+    { data: { email } }, 
     secret,
     {
       algorithm: 'HS256',
