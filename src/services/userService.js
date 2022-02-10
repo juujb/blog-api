@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../config/.env' });
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 const { User } = require('../models');
@@ -31,4 +31,10 @@ const create = async (body) => {
   return { code: 201, token };
 };
 
-module.exports = { create, findByEmail };
+const getAll = async () => {
+  const users = await User.findAll();
+
+  return { code: 200, users };
+};
+
+module.exports = { create, findByEmail, getAll };

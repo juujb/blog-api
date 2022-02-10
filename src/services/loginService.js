@@ -5,11 +5,11 @@ const { findByEmail } = require('./userService');
 const secret = process.env.JWT_SECRET;
 
 const login = async (body) => {
-  const { email } = body;
+  const { email, password } = body;
 
   const user = await findByEmail(email);
 
-  if (!user) {
+  if (!user || user.password !== password) {
     return { code: 400, message: 'Invalid fields' };
   }
 
