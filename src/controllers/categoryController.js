@@ -11,7 +11,7 @@ const create = async (req, res) => {
   res.status(code).json(category);
 };
 
-const getAll = async (req, res) => {
+const getAll = async (_req, res) => {
   const { message, code, categories } = await categoryService.getAll();
 
   if (message) return res.status(code).json({ message });

@@ -9,7 +9,7 @@ const create = async (req, res) => {
   res.status(code).json({ token });
 };
 
-const getAll = async (req, res) => {
+const getAll = async (_req, res) => {
   const { message, code, users } = await userService.getAll();
 
   if (message) return res.status(code).json({ message });
